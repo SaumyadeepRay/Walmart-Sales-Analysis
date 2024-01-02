@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS sales(
     branch VARCHAR(5) NOT NULL,
     city VARCHAR(30) NOT NULL,
     customer_type VARCHAR(30) NOT NULL,
-    gender VARCHAR(30) NOT NULL,
+    gender VARCHAR(10) NOT NULL,
     product_line VARCHAR(100) NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
     quantity INT NOT NULL,
@@ -162,7 +162,7 @@ FROM sales
 GROUP BY product_line
 ORDER BY avg_tax DESC;
 
--- 9. Fetch each product line and add a column to those product line showing "Good", "Bad". Good if its greater than average sales.
+-- 9. Fetch each product line and add a column to those product line showing "Good", and "Bad". Good if its greater than average sales.
 
 SELECT AVG(quantity) AS avg_qnty FROM sales;
 
@@ -177,7 +177,7 @@ GROUP BY product_line;
 
 SELECT * FROM sales;
 
--- 10. Which branch sold more products than average product sold ?
+-- 10. Which branch sold more products than the average product sold ?
 
 SELECT branch, quantity FROM sales;
 
@@ -210,7 +210,7 @@ ORDER BY average_rating DESC;
 
 -- Sales Questions --
 
--- 1. Number of sales made in each time of the day per weekday
+-- 1. Number of sales made at each time of the day per weekday
 
 SELECT invoice_iD, day_name, time_of_day FROM sales;
 
@@ -233,7 +233,7 @@ FROM sales
 GROUP BY customer_type
 ORDER BY total_revenue DESC;
 
--- 3. Which city has the largest tax percent/ VAT (Value Added Tax)?
+-- 3. Which city has the largest tax percentage/ VAT (Value Added Tax)?
 
 SELECT city, valueAddedTax FROM sales;
 
@@ -304,7 +304,7 @@ ORDER BY gender_count;
 -- Gender per branch is more or less the same hence, I don't think has
 -- an effect of the sales per branch and other factors.
 
--- 7. Which time of the day do customers give most ratings ?
+-- 7. Which time of the day do customers give the most ratings ?
 
 SELECT time_of_day, rating FROM sales;
 
@@ -330,7 +330,7 @@ ORDER BY avg_rating DESC;
 -- Branch A and C are doing well in ratings, branch B needs to do a 
 -- little more to get better ratings.
 
--- 9. Which day of the week has the best avg ratings ?
+-- 9. Which day of the week has the best average ratings ?
 
 SELECT day_name, rating FROM sales;
 
@@ -351,7 +351,3 @@ COUNT(day_name) AS total_sales
 FROM sales
 GROUP BY branch, day_name
 ORDER BY total_sales DESC; 
-
-
-
-
